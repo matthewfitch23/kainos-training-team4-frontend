@@ -3,7 +3,6 @@ package com.kainos.training.dropwizard.login.frontends;
 import com.google.common.collect.ImmutableMap;
 import com.kainos.training.dropwizard.login.frontends.config.LoginFrontendsConfiguration;
 import com.kainos.training.dropwizard.login.frontends.resources.ViewsResource;
-import com.kainos.training.jersey.client.BaseClient;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.*;
