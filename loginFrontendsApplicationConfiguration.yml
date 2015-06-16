@@ -1,0 +1,14 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8900
+  adminConnectors:
+    - type: http 
+      port: 8901
+
+testConfigVariable: true
+
+viewRendererConfiguration:
+   .ftl:
+      strict_syntax: yes
+      whitespace_stripping: yes
