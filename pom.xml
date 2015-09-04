@@ -54,9 +54,9 @@
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
-    	<groupId>com.kainos.training</groupId>
-    	<artifactId>blackbox-client</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
+      <groupId>blackbox-client</groupId>
+      <artifactId>com.kainos.training.blackbox.client</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
   
