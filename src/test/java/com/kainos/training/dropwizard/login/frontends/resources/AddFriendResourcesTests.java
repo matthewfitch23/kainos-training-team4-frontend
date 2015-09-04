@@ -53,10 +53,6 @@ public class AddFriendResourcesTests {
 	}
 	
 	@Test
-	public void testNameCapturedWhenEnteredToAddAFriend() {	
-	}
-	
-	@Test
 	public void testEmptyNameWhenSubmitting() {
 		Response addFriendEmptyResponse = resource.addFriend("");
 	
