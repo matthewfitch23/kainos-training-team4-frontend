@@ -68,4 +68,25 @@ public class ViewsResourceTest {
 				actualResponse.getLocation());
 
 	}
+	
+	
+	@Test
+	public void testNameCapturedWhenEnteredToAddAFriend() {
+		
+	}
+	
+	@Test
+	public void testEmptyNameWhenSubmitting() {
+		
+	}
+	
+	@Test
+	public void testAddingDuplicatesToFriendList() {
+		
+	}
+	
+	@Test
+	public void testNameIsStoredWhenAddingFriend() {
+		
+	}
 }
