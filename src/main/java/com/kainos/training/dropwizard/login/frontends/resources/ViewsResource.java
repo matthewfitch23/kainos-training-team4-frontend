@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import com.codahale.metrics.annotation.Timed;
+import com.kainos.training.dropwizard.login.frontends.views.AddFriendView;
 import com.kainos.training.dropwizard.login.frontends.views.Index;
 import com.kainos.training.dropwizard.login.frontends.views.LoginFailureView;
 import com.kainos.training.dropwizard.login.frontends.views.LoginSuccessView;
@@ -56,6 +57,14 @@ public class ViewsResource {
 					UriBuilder.fromUri("login-failure").build()).build();
 		}
 
+	}
+
+	@GET
+	@Timed
+	@Path("/addFriend")
+	@Produces(MediaType.TEXT_HTML)
+	public View addFriend() {
+		return new AddFriendView();
 	}
 
 	@GET
