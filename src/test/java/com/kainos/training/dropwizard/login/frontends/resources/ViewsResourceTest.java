@@ -31,7 +31,7 @@ public class ViewsResourceTest {
 		mockedClient = mock(BaseClient.class);
 		when(mockedClient.getLogin(CORRECT_USERNAME, CORRECT_PASSWORD))
 				.thenReturn(okResponse);
-		resource = new ViewsResource(mockedClient);
+		resource = new ViewsResource(mockedClient, new FriendClient());
 	}
 
 	@Test

@@ -2,6 +2,8 @@ package com.kainos.training.dropwizard.login.frontends.resources;
 
 import io.dropwizard.views.View;
 
+import java.util.List;
+
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,11 +30,8 @@ public class ViewsResource {
 	private BaseClient loginClient;
 	private FriendClient friendClient;
 
-	public ViewsResource(BaseClient loginClient) {
+	public ViewsResource(BaseClient loginClient, FriendClient friendClient) {
 		this.loginClient = loginClient;
-	}
-	
-	public ViewsResource(FriendClient friendClient) {
 		this.friendClient = friendClient;
 	}
 
@@ -73,18 +72,22 @@ public class ViewsResource {
 	@Path("add-friend")
 	@Produces(MediaType.TEXT_HTML)
 	public Response addFriend(@FormParam("name") String name) {
+		System.out.println("In add friend");
 		Response failureResponse = Response.seeOther(
 				UriBuilder.fromUri("add-friend-failure").build()).build();;
 
 		// Ensure name has been entered
-		if (name.isEmpty()) {
+		if (null == name || name.isEmpty()) {
 			return failureResponse;
 		}
 
 		// Ensure friend hasn't already been added
-		for (Person person : friendClient.getFriendsList()) {
-			if (name == person.getName()) {
-				return failureResponse;
+		List<Person> friendsList = friendClient.getFriendsList();
+		if (friendsList.size() > 0) {
+			for (Person person : friendsList) {
+				if (name == person.getName()) {
+					return failureResponse;
+				}
 			}
 		}
 

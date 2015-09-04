@@ -1,21 +1,21 @@
 package com.kainos.training.dropwizard.login.frontends.resources;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.never;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
-import org.eclipse.persistence.internal.oxm.schema.model.Any;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.kainos.training.blackbox.client.FriendClient;
 import com.kainos.training.blackboxinterface.model.person.Person;
+import com.kainos.training.jersey.client.BaseClient;
 
 public class AddFriendResourcesTests {
 	
@@ -38,7 +38,7 @@ public class AddFriendResourcesTests {
 		// when(mockedFriendClient.addFriend(friend).thenReturn(successResponse));
 		
 				
-		resource = new ViewsResource(mockedFriendClient);
+		resource = new ViewsResource(new BaseClient(), mockedFriendClient);
 	}
 	
 	@Test
