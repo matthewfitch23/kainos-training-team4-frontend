@@ -53,6 +53,11 @@
     	<artifactId>com.kainos.training.jersey.client</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+    	<groupId>com.kainos.training</groupId>
+    	<artifactId>blackbox-client</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   
   <build>
