@@ -12,6 +12,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import com.codahale.metrics.annotation.Timed;
+import com.kainos.training.blackbox.client.FriendClient;
+import com.kainos.training.blackboxinterface.model.person.Person;
+import com.kainos.training.dropwizard.login.frontends.views.AddFriendFailureView;
+import com.kainos.training.dropwizard.login.frontends.views.AddFriendSuccessView;
 import com.kainos.training.dropwizard.login.frontends.views.AddFriendView;
 import com.kainos.training.dropwizard.login.frontends.views.Index;
 import com.kainos.training.dropwizard.login.frontends.views.LoginFailureView;
@@ -22,6 +26,7 @@ import com.kainos.training.jersey.client.BaseClient;
 public class ViewsResource {
 
 	private BaseClient loginClient;
+	private FriendClient friendClient;
 
 	public ViewsResource(BaseClient loginClient) {
 		this.loginClient = loginClient;
@@ -59,9 +64,28 @@ public class ViewsResource {
 
 	}
 
+	@POST
+	@Timed
+	@Path("add-friend")
+	@Produces(MediaType.TEXT_HTML)
+	public Response addFriend(@FormParam("name") String name) {
+		Person newFriend = new Person();
+		newFriend.setName(name);
+		Response response = friendClient.addFriend(newFriend);
+
+		if (response.getStatus() == 200) {
+			return Response.seeOther(
+					UriBuilder.fromUri("add-friend-success").build()).build();
+		} else {
+			return Response.seeOther(
+					UriBuilder.fromUri("add-friend-failure").build()).build();
+		}
+
+	}
+
 	@GET
 	@Timed
-	@Path("/addFriend")
+	@Path("/add-friend")
 	@Produces(MediaType.TEXT_HTML)
 	public View addFriend() {
 		return new AddFriendView();
@@ -81,5 +105,21 @@ public class ViewsResource {
 	@Produces(MediaType.TEXT_HTML)
 	public View loginFailure() {
 		return new LoginFailureView();
+	}
+
+	@GET
+	@Timed
+	@Path("add-friend-success")
+	@Produces(MediaType.TEXT_HTML)
+	public View addFriendSuccess() {
+		return new AddFriendSuccessView();
+	}
+
+	@GET
+	@Timed
+	@Path("add-friend-failure")
+	@Produces(MediaType.TEXT_HTML)
+	public View addFriendFailure() {
+		return new AddFriendFailureView();
 	}
 }
