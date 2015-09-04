@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.never;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -26,6 +27,8 @@ public class AddFriendResourcesTests {
 	Response okResponse = Response.ok().build();
 	Response successResponse = Response.seeOther(
 			UriBuilder.fromUri("add-friend-success").build()).build();
+	Response notOkResponse = Response.seeOther(
+			UriBuilder.fromUri("add-friend-failure").build()).build();
 	
 	@Before
 	public void setup() {
@@ -55,7 +58,11 @@ public class AddFriendResourcesTests {
 	
 	@Test
 	public void testEmptyNameWhenSubmitting() {
-		//	
+		Response addFriendEmptyResponse = resource.addFriend("");
+	
+		assertEquals(addFriendEmptyResponse.getStatus(), notOkResponse.getStatus());
+		assertEquals(addFriendEmptyResponse.getLocation(), notOkResponse.getLocation());
+		verify(mockedFriendClient, never()).addFriend(any(Person.class));
 	}
 	
 	@Test
