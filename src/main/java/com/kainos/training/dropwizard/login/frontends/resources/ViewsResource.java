@@ -31,6 +31,10 @@ public class ViewsResource {
 	public ViewsResource(BaseClient loginClient) {
 		this.loginClient = loginClient;
 	}
+	
+	public ViewsResource(FriendClient friendClient) {
+		this.friendClient = friendClient;
+	}
 
 	@GET
 	@Timed
