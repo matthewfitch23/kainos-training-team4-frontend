@@ -73,18 +73,32 @@ public class ViewsResource {
 	@Path("add-friend")
 	@Produces(MediaType.TEXT_HTML)
 	public Response addFriend(@FormParam("name") String name) {
+		Response failureResponse = Response.seeOther(
+				UriBuilder.fromUri("add-friend-failure").build()).build();;
+
+		// Ensure name has been entered
+		if (name.isEmpty()) {
+			return failureResponse;
+		}
+
+		// Ensure friend hasn't already been added
+		for (Person person : friendClient.getFriendsList()) {
+			if (name == person.getName()) {
+				return failureResponse;
+			}
+		}
+
 		Person newFriend = new Person();
 		newFriend.setName(name);
+
 		Response response = friendClient.addFriend(newFriend);
 
 		if (response.getStatus() == 200) {
 			return Response.seeOther(
 					UriBuilder.fromUri("add-friend-success").build()).build();
 		} else {
-			return Response.seeOther(
-					UriBuilder.fromUri("add-friend-failure").build()).build();
+			return failureResponse;
 		}
-
 	}
 
 	@GET
